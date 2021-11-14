@@ -1,12 +1,14 @@
 const rpn = (input) => {
   const table = document.querySelector('.main-table');
   const tr = document.createElement(`tr`);
+  const alertSuccess = document.querySelector('.alert-primary');
 
   let inputExpression = input.value.split(' ');
   let stack = [];
   let outputExpression = [];
   let priority = {
     '(': 5,
+    '!': 4,
     '^': 4,
     '*': 3,
     '/': 3,
@@ -47,7 +49,7 @@ const rpn = (input) => {
         }
         stack.push(inputExpression[i]);
       } else {
-        outputExpression.push(stack[stack.length - 1]);
+        if (stack[stack.length - 1] !== '(') outputExpression.push(stack[stack.length - 1]);
         stack.pop();
         stack.splice(stack.lastIndexOf('('), 1);
       }
@@ -65,6 +67,7 @@ const rpn = (input) => {
             <td>${outputExpression.concat(tempStack.reverse()).join(' ')}</td>`
 
       table.append(tr);
+      alertSuccess.innerHTML = `Результат преобразования: <b><u>${outputExpression.concat(tempStack.reverse()).join(' ')}</u></b>`
     } else {
       const tr = document.createElement(`tr`);
 
@@ -76,19 +79,37 @@ const rpn = (input) => {
       table.append(tr);
     }
   }
-
 };
 
 const button = document.querySelector('.btn-primary');
 const dropdownItem = document.querySelectorAll('.dropdown-menu .dropdown-item');
 const input = document.querySelector('.form-control');
+const alertError = document.querySelector('.alert-danger');
+const alertSuccess = document.querySelector('.alert-primary');
 
 button.addEventListener('click', () => {
-  document.querySelector('.main-table').innerHTML = '';
-  document.querySelector('table').classList.remove('d-none');
-  rpn(input);
+  if (validator(input.value) && input.value != '') {
+    document.querySelector('.main-table').innerHTML = '';
+    document.querySelector('table').classList.remove('d-none');
+    alertError.classList.add('d-none');
+    console.log(validator(input.value));
+    rpn(input);
+    alertSuccess.classList.remove('d-none');
+
+  } else {
+    document.querySelector('table').classList.add('d-none');
+    alertError.classList.remove('d-none');
+    alertError.innerHTML = (input.value != '') ? "Проверьте корректность расстановки скобок в выражении" : "Строка ввода выражения не должна быть пуста"
+  }
 });
 
-dropdownItem.forEach(item => item.addEventListener('click', () => {
-  input.setAttribute('value', item.textContent);
+dropdownItem.forEach(item => item.addEventListener('click', (e) => {
+  input.value = item.innerHTML;
 }));
+
+const validator = (str) => {
+  let opens = str.match(/\(/g) || [];
+  let closes = str.match(/\)/g) || [];
+
+  return opens.length === closes.length;
+};
