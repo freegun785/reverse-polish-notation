@@ -14,31 +14,34 @@
 <body>
   <div class="jumbotron jumbotron-fluid shadow-sm p-3 mb-5 rounded">
     <div class="container d-flex flex-column justify-content-center">
-      <h1 class="d-flex justify-content-center">Польская обратная запись</h1>
-      <div class="alert alert-danger shadow-sm d-none" role="alert">
+      <h1 class="d-flex justify-content-center">Польская инверсная запись</h1>
+      <div class="alert alert-danger invisible"
+        style="box-shadow: 0px 1px 5px 2px rgba(245, 198, 203, 0.6), 0 0.125rem 0.25rem rgba(0, 0, 0, 0.15);"
+        role="alert">Строка ввода выражения не должна быть пуста
       </div>
       <div class="form-group">
         <input type="text" class="form-control shadow-sm" id="exp" placeholder="Введите выражение" />
       </div>
       <div class="btn-group d-flex justify-content-center">
-
+        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#signInModal">?</button>
         <button type="button" class="btn btn-primary">Вычислить</button>
         <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
           aria-expanded="false">
           <span class="visually-hidden"></span>
         </button>
-        
         <ul class="dropdown-menu">
           <li><a class="dropdown-header">Примеры</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
           <li><a class="dropdown-item" href="#">r / ( ( g - h + k ) * ( a + s - d ) ) * f = g * ( a - s ) - l</a></li>
           <li><a class="dropdown-item" href="#">a + b * d / c = 0</a></li>
           <li><a class="dropdown-item" href="#">A + b * c - t / r</a></li>
           <li><a class="dropdown-item" href="#">x + ( y * ! z + x ) * z</a></li>
           <li><a class="dropdown-item" href="#">sqrt ( x ) - 1 / 2 * sin ( x ^ 2 - 2 )</a></li>
+          <li><a class="dropdown-item" href="#">a + b * с – d / (a + b)</a></li>
         </ul>
-
       </div>
-      
     </div>
   </div>
   <div class="container d-flex flex-column justify-content-center">
@@ -53,26 +56,77 @@
       </thead>
       <tbody class="main-table"></tbody>
     </table>
-    <div class="alert alert-primary shadow d-none" role="alert">
-      </div>
+    <div class="alert alert-primary d-none"
+      style="box-shadow: 0px 1px 5px 2px rgba(184, 218, 255, 0.6), 0 0.5rem 1rem rgba(0, 0, 0, 0.15);" role="alert">
+    </div>
   </div>
-  
   </div>
-
-  
-
-
-<div class="container">
-  <footer class="d-flex flex-wrap py-4 my-4 border-top">
+  <div class="container">
+    <footer class="d-flex flex-wrap py-4 my-4 border-top">
       <span class="text-muted">Мацкевич В.А.<br>АСОиУб-18-1</span>
-  </footer>
-</div>
+    </footer>
+  </div>
+  <div class="modal fade" tabindex="-1" id="signInModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Что это?</h5>
+          <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="close">×</button>
+        </div>
+        <div class="modal-body">
+          <p><b>Обратная польская запись</b> (англ. Reverse Polish notation, RPN) — форма записи математических и логических выражений, в которой операнды расположены перед знаками операций.</p>
+          <p>Каждому ограничителю, который может встретиться в арифметическом выражении присваивается приоритет.</p>
+          <hr class="divider">
+          <img src="/img/rpn1.png" class="img-fluid mx-auto d-block" alt="...">
+          <hr class="divider">
+          <ol>
+            <li>Если приоритет входного знака <b>равен 0</b> то новый знак
+              добавляется в стек ничего не выталкивая.</li>
+            <li>Если приоритет входного знака <b>больше</b> приоритета знака,
+              находящегося в вершине стека, то новый знак добавляется в стек
+              ничего не выталкивая.</li>
+            <li>Если приоритет входного знака меньше или равен приоритету
+              знака, находящегося в вершине стека, то из стека выталкивается
+              и переписывается в выходную строку знак, находящийся в
+              вершине, а также следующие за ним знаки с приоритетами
+              большими или равными приоритету входного знака, после этого
+              входной знак добавляется в стек.
+            </li>
+            <li>Символы «)», «(» обрабатываются особым образом: «(» –
+              просто записывается в стек и не выталкивает из него ни одного
+              знака, в то же время её не может вытолкнуть ни один знак, кроме
+              закрывающей скобки. Закрывающая скобка («)») выталкивает из
+              стека всё, вплоть до открывающей скобки, и с ней они взаимно
+              уничтожаются.
+            </li>
+            <li>По окончании входной строки все символы из стека
+              переписываются во входную строку.
+            </li>
+          </ol>
+          <hr class="divider">
+          <img src="/img/rpn2.png" class="img-fluid mx-auto d-block" alt="...">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="close">Закрыть</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
     integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous">
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
     integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous">
+  </script>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
   </script>
 </body>
 

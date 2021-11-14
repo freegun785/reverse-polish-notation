@@ -60,14 +60,14 @@ const rpn = (input) => {
     if (i === inputExpression.length) {
       const tr = document.createElement(`tr`);
       const tempStack = stack;
-
+      const result = outputExpression.concat(tempStack.reverse()).join(' ');
       tr.innerHTML = `<th scope="row">${i + 2}</th>
             <td>${inputExpression.slice(i, inputExpression.length).join(' ')}</td>
             <td>${stack = ''}</td>
-            <td>${outputExpression.concat(tempStack.reverse()).join(' ')}</td>`
+            <td>${result}</td>`
 
       table.append(tr);
-      alertSuccess.innerHTML = `Результат преобразования: <b><u>${outputExpression.concat(tempStack.reverse()).join(' ')}</u></b>`
+      alertSuccess.innerHTML = `Результат преобразования: <b><u>${result}</u></b>`
     } else {
       const tr = document.createElement(`tr`);
 
@@ -91,14 +91,15 @@ button.addEventListener('click', () => {
   if (validator(input.value) && input.value != '') {
     document.querySelector('.main-table').innerHTML = '';
     document.querySelector('table').classList.remove('d-none');
-    alertError.classList.add('d-none');
+    alertError.classList.add('invisible');
     console.log(validator(input.value));
     rpn(input);
     alertSuccess.classList.remove('d-none');
 
   } else {
     document.querySelector('table').classList.add('d-none');
-    alertError.classList.remove('d-none');
+    alertSuccess.classList.add('d-none');
+    alertError.classList.remove('invisible');
     alertError.innerHTML = (input.value != '') ? "Проверьте корректность расстановки скобок в выражении" : "Строка ввода выражения не должна быть пуста"
   }
 });
