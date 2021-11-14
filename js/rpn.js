@@ -1,5 +1,4 @@
-const rpn = () => {
-  const input = document.querySelector('.form-control');
+const rpn = (input) => {
   const table = document.querySelector('.main-table');
   const tr = document.createElement(`tr`);
 
@@ -7,14 +6,14 @@ const rpn = () => {
   let stack = [];
   let outputExpression = [];
   let priority = {
-    ')': 0,
+    '(': 5,
     '^': 4,
     '*': 3,
     '/': 3,
     '+': 2,
     '-': 2,
     '=': 1,
-    '(': 5,
+    ')': 0,
   };
 
   tr.innerHTML = `<th scope="row">1</th>
@@ -81,8 +80,15 @@ const rpn = () => {
 };
 
 const button = document.querySelector('.btn-primary');
+const dropdownItem = document.querySelectorAll('.dropdown-menu .dropdown-item');
+const input = document.querySelector('.form-control');
 
-button.addEventListener('click', (e) => {
+button.addEventListener('click', () => {
   document.querySelector('.main-table').innerHTML = '';
-  rpn();
+  document.querySelector('table').classList.remove('d-none');
+  rpn(input);
 });
+
+dropdownItem.forEach(item => item.addEventListener('click', () => {
+  input.setAttribute('value', item.textContent);
+}));

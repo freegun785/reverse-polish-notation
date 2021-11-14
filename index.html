@@ -1,59 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RPN</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-      crossorigin="anonymous"
-    />
-    <script src="js/rpn.js" defer></script>
-  </head>
 
-  <body>
-    <div class="container">
-      <h1>Польская обратная запись</h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RPN</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+  <script src="js/rpn.js" defer></script>
+</head>
+
+<body>
+  <div class="jumbotron jumbotron-fluid shadow-sm p-3 mb-5 rounded">
+    <div class="container d-flex flex-column justify-content-center">
+      <h1 class="d-flex justify-content-center">Польская обратная запись</h1>
       <div class="form-group">
-        <input
-          type="text"
-          class="form-control"
-          id="exp"
-          placeholder="Введите выражение"
-        />
-        <button type="button" class="btn btn-primary">Вычислить</button>
+        <input type="text" class="form-control" id="exp" placeholder="Введите выражение" />
       </div>
+      <div class="btn-group d-flex justify-content-center">
 
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">№</th>
-            <th scope="col">Входная строка</th>
-            <th scope="col">Стек</th>
-            <th scope="col">Выходная строка</th>
-          </tr>
-        </thead>
-        <tbody class="main-table"></tbody>
-      </table>
+        <button type="button" class="btn btn-primary">Вычислить</button>
+        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          <span class="visually-hidden"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-header">Примеры</a></li>
+          <li><a class="dropdown-item" href="#">r / ( ( g - h + k ) * ( a + s - d ) ) * f = g * ( a - s ) - l</a></li>
+          <li><a class="dropdown-item" href="#">a + b * d / c = 0</a></li>
+          <li><a class="dropdown-item" href="#">A + b * c - t / r</a></li>
+        </ul>
+
+      </div>
     </div>
+  </div>
+  <div class="container d-flex flex-column justify-content-center">
+    <table class="table table-striped table-bordered d-none">
+      <thead>
+        <tr>
+          <th scope="col">№</th>
+          <th scope="col">Входная строка</th>
+          <th scope="col">Стек</th>
+          <th scope="col">Выходная строка</th>
+        </tr>
+      </thead>
+      <tbody class="main-table"></tbody>
+    </table>
+  </div>
+  </div>
 
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+    integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous">
+  </script>
+</body>
+
 </html>
